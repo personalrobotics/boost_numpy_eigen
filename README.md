@@ -23,4 +23,4 @@ array library similar to numpy.ndarray for C++. Some of the code comes from `nda
 
 ## Authors
 
-`boost_numpy_eigen` was created by [Julien Rebetez](https://github.com/julienr). It has received contributions from [Michael Koval](https://github.com/mkoval), [Jeongseok Lee](https://github.com/jslee02), and [Pras Velagapudi](https://github.com/psigen).
+`boost_numpy_eigen` was created by [Julien Rebetez](https://github.com/julienr) ([old repo](https://github.com/julienr/boost_numpy_eigen)). It has received contributions from [Michael Koval](https://github.com/mkoval), [Jeongseok Lee](https://github.com/jslee02), and [Pras Velagapudi](https://github.com/psigen).
