@@ -1,4 +1,4 @@
-# boost_numpy_eigen [![Build Status](https://travis-ci.org/personalrobotics/Boost.NumPy_Eigen.svg?branch=master)](https://travis-ci.org/personalrobotics/Boost.NumPy_Eigen)
+# boost_numpy_eigen [![Build Status](https://travis-ci.org/personalrobotics/boost_numpy_eigen.svg?branch=master)](https://travis-ci.org/personalrobotics/boost_numpy_eigen)
 
 This is a simple example on how to use boost.python to call c++ code from python and convert numpy arrays to [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page).
 
