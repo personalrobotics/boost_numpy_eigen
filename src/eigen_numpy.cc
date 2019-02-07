@@ -2,6 +2,8 @@
 #include <Eigen/Eigen>
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
+#include "numpy_conversions_shared.h"
+#include "eigen_numpy.h"
 
 // These macros were renamed in NumPy 1.7.1.
 #if !defined(NPY_ARRAY_C_CONTIGUOUS) && defined(NPY_C_CONTIGUOUS)
@@ -15,14 +17,6 @@
 namespace bp = boost::python;
 
 using namespace Eigen;
-
-template <typename SCALAR>
-struct NumpyEquivalentType {};
-
-template <> struct NumpyEquivalentType<double> {enum { type_code = NPY_DOUBLE };};
-template <> struct NumpyEquivalentType<int> {enum { type_code = NPY_INT };};
-template <> struct NumpyEquivalentType<float> {enum { type_code = NPY_FLOAT };};
-template <> struct NumpyEquivalentType<std::complex<double> > {enum { type_code = NPY_CDOUBLE };};
 
 template <typename SourceType, typename DestType >
 static void copy_array(const SourceType* source, DestType* dest,
@@ -301,4 +295,8 @@ SetupEigenConverters() {
   MAT_CONV(1, X, double);
   MAT_CONV(3, 4, double);
   MAT_CONV(2, X, double);
+
+#if PY_VERSION_HEX >= 0x03000000
+	return 0;
+#endif
 }

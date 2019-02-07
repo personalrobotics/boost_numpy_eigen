@@ -4,5 +4,6 @@
 
 BOOST_PYTHON_MODULE(boost_numpy_eigen)
 {
-    SetupEigenConverters();
+    //SetupEigenConverters();
+    SetUpEigenTensorConverters();
 }
