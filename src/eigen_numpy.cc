@@ -1,4 +1,4 @@
-#include "eigen_numpy.h"
+#include "boost_numpy_eigen/eigen_numpy.h"
 
 #include <Eigen/Eigen>
 #include <unsupported/Eigen/CXX11/Tensor>

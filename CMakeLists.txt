@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(BoostNumpyEigen)
+
+project(boost_numpy_eigen)
 
 # C++11 standard
 if(CMAKE_VERSION EQUAL 3.1.0 OR CMAKE_VERSION GREATER 3.1.0)
@@ -64,22 +65,23 @@ endif()
 find_package(Eigen3 REQUIRED)
 find_package(NumPy ${BOOST_PYTHON_NUMPY_EIGEN_PYTHON_VERSION} REQUIRED)
 
-# Global settings for include paths.
-include_directories(
-  ${PYTHON_INCLUDE_DIRS}
-  ${Boost_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIR}
-  ${NUMPY_INCLUDE_DIRS}
-)
-
 # main library
 add_library(boost_numpy_eigen SHARED
   src/eigen_numpy.cc
   src/python.cc
 )
+target_include_directories(boost_numpy_eigen
+  PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${PYTHON_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
+    ${EIGEN3_INCLUDE_DIR}
+    ${NUMPY_INCLUDE_DIRS}
+)
 target_link_libraries(boost_numpy_eigen
-  ${Boost_LIBRARIES}
-  ${PYTHON_LIBRARIES}
+  PUBLIC
+    ${Boost_LIBRARIES}
+    ${PYTHON_LIBRARIES}
 )
 set_target_properties(boost_numpy_eigen PROPERTIES
   PREFIX ""
@@ -89,25 +91,5 @@ install(TARGETS boost_numpy_eigen
   LIBRARY DESTINATION "${PYTHON_SITE_PACKAGES}"
 )
 
-# unit test
-add_library(test_eigen_numpy_mod SHARED EXCLUDE_FROM_ALL src/test_eigen_numpy_mod.cc)
-target_link_libraries(test_eigen_numpy_mod boost_numpy_eigen)
-set_target_properties(test_eigen_numpy_mod PROPERTIES
-  SUFFIX ".so"  # python uses '.so' extension even on macOS
-)
-set_target_properties(test_eigen_numpy_mod PROPERTIES PREFIX "")
-add_custom_command(TARGET test_eigen_numpy_mod
-  POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy test_eigen_numpy_mod*.so ${CMAKE_SOURCE_DIR}
-)
-
-# example
-add_library(hello SHARED EXCLUDE_FROM_ALL src/hello.cc src/hello_mod.cc)
-target_link_libraries(hello boost_numpy_eigen)
-set_target_properties(hello PROPERTIES
-  SUFFIX ".so"  # python uses '.so' extension even on macOS
-)
-add_custom_command(TARGET hello
-  POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy libhello*.so ${CMAKE_SOURCE_DIR}
-)
+add_subdirectory(test)
+add_subdirectory(examples)
