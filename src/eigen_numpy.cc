@@ -1,9 +1,9 @@
-#include <boost/python.hpp>
+#include "eigen_numpy.h"
+
 #include <Eigen/Eigen>
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
 #include "numpy_conversions_shared.h"
-#include "eigen_numpy.h"
 
 // These macros were renamed in NumPy 1.7.1.
 #if !defined(NPY_ARRAY_C_CONTIGUOUS) && defined(NPY_C_CONTIGUOUS)
@@ -297,6 +297,6 @@ SetupEigenConverters() {
   MAT_CONV(2, X, double);
 
 #if PY_VERSION_HEX >= 0x03000000
-	return 0;
+  return 0;
 #endif
 }

@@ -21,6 +21,7 @@
 #ifndef _NUMPY_CONVERSIONS_SHARED_H_
 #define _NUMPY_CONVERSIONS_SHARED_H_
 
+#include <complex>
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/ndarraytypes.h>
 
@@ -34,5 +35,3 @@ template<> struct NumpyEquivalentType<unsigned char>{enum {type_code = NPY_UBYTE
 template<> struct NumpyEquivalentType<std::complex<double> > {enum {type_code = NPY_CDOUBLE};};
 
 #endif
-
-
