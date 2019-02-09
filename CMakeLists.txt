@@ -75,8 +75,6 @@ include_directories(
 # main library
 add_library(boost_numpy_eigen SHARED
   src/eigen_numpy.cc
-  src/eigen_numpy_tensor.cc
-  src/numpy_conversions_shared.h
   src/python.cc
 )
 target_link_libraries(boost_numpy_eigen
