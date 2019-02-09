@@ -1,9 +1,9 @@
 #include "eigen_numpy.h"
 
 #include <Eigen/Eigen>
-#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
+#if EIGEN_VERSION_AT_LEAST(3, 3, 0)
 #include <unsupported/Eigen/CXX11/Tensor>
-#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
+#endif // EIGEN_VERSION_AT_LEAST(3, 3, 0)
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
 
@@ -227,7 +227,7 @@ struct EigenTransformFromPython {
   }
 };
 
-#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
+#if EIGEN_VERSION_AT_LEAST(3, 3, 0)
 
 //Assumes row-major destination
 template<typename SourceType, typename DestType>
@@ -381,7 +381,7 @@ struct EigenTensorFromPython {
   }
 };
 
-#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
+#endif // EIGEN_VERSION_AT_LEAST(3, 3, 0)
 
 #define EIGEN_MATRIX_CONVERTER(Type) \
   EigenMatrixFromPython<Type>();  \
@@ -408,7 +408,7 @@ struct EigenTensorFromPython {
   typedef Block<Matrix ## R ## C ## T, BR, BC> Block ## R ## C ## BR ## BC ## T; \
   EIGEN_MATRIX_CONVERTER(Block ## R ## C ## BR ## BC ## T);
 
-#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
+#if EIGEN_VERSION_AT_LEAST(3, 3, 0)
 
 //For two-way Eigen <--> numpy Tensor converters
 #define EIGEN_TENSOR_CONVERTER(Type) \
@@ -424,7 +424,7 @@ struct EigenTensorFromPython {
   typedef Tensor<T, D> Tensor ## T ## D; \
   EIGEN_TENSOR_CONVERTER(Tensor ## T ## D);
 
-#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
+#endif // EIGEN_VERSION_AT_LEAST(3, 3, 0)
 
 static const int X = Eigen::Dynamic;
 
@@ -478,7 +478,7 @@ SetupEigenConverters() {
   MAT_CONV(3, 4, double);
   MAT_CONV(2, X, double);
 
-#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
+#if EIGEN_VERSION_AT_LEAST(3, 3, 0)
 
   TENSOR_ROW_MAJOR_CONV(float, 3);
   TENSOR_ROW_MAJOR_CONV(float, 4);
@@ -492,7 +492,7 @@ SetupEigenConverters() {
   TENSOR_CONV(double, 3);
   TENSOR_CONV(double, 4);
 
-#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
+#endif // EIGEN_VERSION_AT_LEAST(3, 3, 0)
 
 #if PY_VERSION_HEX >= 0x03000000
   return 0;
