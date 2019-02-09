@@ -1,9 +1,9 @@
 // Tests from ndarray lib
 #include <boost/python.hpp>
 #include <Eigen/Eigen>
-#if EIGEN_MAJOR_VERSION > 3 || (EIGEN_MAJOR_VERSION == 3 && EIGEN_MINOR_VERSION > 2)
+#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
 #include <unsupported/Eigen/CXX11/Tensor>
-#endif
+#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
 #include "eigen_numpy.h"
 
 #include <cstdarg>
@@ -13,7 +13,7 @@
 namespace bp = boost::python;
 
 bool tensorsSupported(){
-#if EIGEN_MAJOR_VERSION < 3 || (EIGEN_MAJOR_VERSION == 3 && EIGEN_MINOR_VERSION < 2)
+#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
   return false;
 #else
   return true;
@@ -187,7 +187,7 @@ BOOST_PYTHON_MODULE(test_eigen_numpy_mod) {
 
   bp::def("tensorsSupported", tensorsSupported);
 
-#if EIGEN_MAJOR_VERSION > 3 || (EIGEN_MAJOR_VERSION == 3 && EIGEN_MINOR_VERSION >= 2)
+#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
   bp::def("acceptTensor_423f", acceptTensor3< Eigen::Tensor<float,3> >);
   bp::def("acceptTensor_2423d_cref", acceptTensor4< Eigen::Tensor<double,4> const &>);
   bp::def("acceptTensor_423d_cref", acceptTensor3< Eigen::Tensor<double,3> const &>);
@@ -195,5 +195,5 @@ BOOST_PYTHON_MODULE(test_eigen_numpy_mod) {
   bp::def("returnTensor_423d", returnTensor3<Eigen::Tensor<double,3>>);
   bp::def("returnTensor_2423d_c", returnTensor4<Eigen::Tensor<double,4> const>);
   bp::def("returnTensor_423d_c", returnTensor3<Eigen::Tensor<double,3> const>);
-#endif
+#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
 }

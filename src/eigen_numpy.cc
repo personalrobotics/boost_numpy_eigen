@@ -1,7 +1,9 @@
 #include "eigen_numpy.h"
 
 #include <Eigen/Eigen>
+#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
 #include <unsupported/Eigen/CXX11/Tensor>
+#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
 #define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
 #include <numpy/arrayobject.h>
 
@@ -225,6 +227,8 @@ struct EigenTransformFromPython {
   }
 };
 
+#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
+
 //Assumes row-major destination
 template<typename SourceType, typename DestType>
 static void copy_tensor(
@@ -377,6 +381,8 @@ struct EigenTensorFromPython {
   }
 };
 
+#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
+
 #define EIGEN_MATRIX_CONVERTER(Type) \
   EigenMatrixFromPython<Type>();  \
   bp::to_python_converter<Type, EigenMatrixToPython<Type> >();
@@ -402,6 +408,8 @@ struct EigenTensorFromPython {
   typedef Block<Matrix ## R ## C ## T, BR, BC> Block ## R ## C ## BR ## BC ## T; \
   EIGEN_MATRIX_CONVERTER(Block ## R ## C ## BR ## BC ## T);
 
+#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
+
 //For two-way Eigen <--> numpy Tensor converters
 #define EIGEN_TENSOR_CONVERTER(Type) \
   EigenTensorFromPython<Type>(); \
@@ -415,6 +423,8 @@ struct EigenTensorFromPython {
 #define TENSOR_CONV(T, D) \
   typedef Tensor<T, D> Tensor ## T ## D; \
   EIGEN_TENSOR_CONVERTER(Tensor ## T ## D);
+
+#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
 
 static const int X = Eigen::Dynamic;
 
@@ -459,11 +469,6 @@ SetupEigenConverters() {
   EIGEN_TRANSFORM_CONVERTER(Projective2d);
   EIGEN_TRANSFORM_CONVERTER(Projective3d);
 
-  TENSOR_ROW_MAJOR_CONV(float, 3);
-  TENSOR_ROW_MAJOR_CONV(float, 4);
-  TENSOR_ROW_MAJOR_CONV(double, 3);
-  TENSOR_ROW_MAJOR_CONV(double, 4);
-
   MAT_CONV(2, 3, double);
   MAT_CONV(X, 3, double);
   MAT_CONV(X, X, double);
@@ -473,12 +478,21 @@ SetupEigenConverters() {
   MAT_CONV(3, 4, double);
   MAT_CONV(2, X, double);
 
+#if EIGEN_VERSION_AT_LEAST(3, 2, 0)
+
+  TENSOR_ROW_MAJOR_CONV(float, 3);
+  TENSOR_ROW_MAJOR_CONV(float, 4);
+  TENSOR_ROW_MAJOR_CONV(double, 3);
+  TENSOR_ROW_MAJOR_CONV(double, 4);
+
   TENSOR_CONV(int, 3);
   TENSOR_CONV(int, 4);
   TENSOR_CONV(float, 3);
   TENSOR_CONV(float, 4);
   TENSOR_CONV(double, 3);
   TENSOR_CONV(double, 4);
+
+#endif // EIGEN_VERSION_AT_LEAST(3, 2, 0)
 
 #if PY_VERSION_HEX >= 0x03000000
   return 0;
