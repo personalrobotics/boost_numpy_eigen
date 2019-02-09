@@ -14,9 +14,9 @@ namespace bp = boost::python;
 
 bool tensorsSupported(){
 #if EIGEN_VERSION_AT_LEAST(3, 3, 0)
-  return false;
-#else
   return true;
+#else
+  return false;
 #endif
 }
 
@@ -65,7 +65,7 @@ bool acceptTensor4(T4 t){
 
 template <typename M>
 bool acceptMatrix(M m) {
-    return (m(0,0) == 1) && (m(0,1) == 2) && (m(0,2) == 3) 
+    return (m(0,0) == 1) && (m(0,1) == 2) && (m(0,2) == 3)
         && (m(1,0) == 4) && (m(1,1) == 5) && (m(1,2) == 6);
 }
 
