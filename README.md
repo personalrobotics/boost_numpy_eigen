@@ -21,7 +21,8 @@ $ python test_eigen_numpy.py
 ```
 $ sudo apt-apt-repository ppa:personalrobotics/ppa
 $ sudo apt update
-$ sudo apt install python-boost-numpy-eigen
+$ sudo apt install python-boost-numpy-eigen   # Python 2 package
+$ sudo apt install python3-boost-numpy-eigen  # Python 3 package
 ```
 
 ## Links
