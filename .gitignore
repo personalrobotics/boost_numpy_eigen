@@ -1,3 +1,4 @@
+# Generated files
 lib/
 libs/
 CMakeFiles/
@@ -14,3 +15,18 @@ boost-numpy-eigen-*-Linux.tar.Z
 boost-numpy-eigen-*-Linux.tar.gz
 *.o
 *.so
+
+# Common build output folders
+cmake-build-debug/
+cmake-build-release/
+build/
+.build/
+
+# IDE project files
+.idea/
+.project
+.cproject
+.settings/
+.pydevproject
+*.sublime-project
+*.sublime-workspace
