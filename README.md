@@ -21,7 +21,7 @@ $ python test_eigen_numpy.py
 ```
 $ sudo apt-apt-repository ppa:personalrobotics/ppa
 $ sudo apt update
-$ sudo apt install chimera
+$ sudo apt install python-boost-numpy-eigen
 ```
 
 ## Links
