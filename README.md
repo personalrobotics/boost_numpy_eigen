@@ -16,7 +16,7 @@ $ python test_eigen_numpy.py
 
 ### On Ubuntu using `apt`
 
-#### Xenial/Bionic
+#### Trusty/Xenial/Bionic
 
 ```
 $ sudo apt-apt-repository ppa:personalrobotics/ppa
