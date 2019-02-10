@@ -12,6 +12,18 @@ $ make test_eigen_numpy_mod
 $ python test_eigen_numpy.py
 ```
 
+## Installation
+
+### On Ubuntu using `apt`
+
+#### Xenial/Bionic
+
+```
+$ sudo apt-apt-repository ppa:personalrobotics/ppa
+$ sudo apt update
+$ sudo apt install chimera
+```
+
 ## Links
 
 There also is the [`ndarray`](https://github.com/ndarray/ndarray) project, that aims at providing a multidimensionnal
