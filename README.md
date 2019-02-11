@@ -16,7 +16,7 @@ $ python test_eigen_numpy.py
 
 ### On Ubuntu using `apt`
 
-#### Trusty/Xenial/Bionic
+#### Trusty/Xenial/Bionic/Cosmic/Disco
 
 ```
 $ sudo apt-apt-repository ppa:personalrobotics/ppa
