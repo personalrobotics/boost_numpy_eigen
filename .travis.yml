@@ -2,7 +2,7 @@ language: cpp
 
 sudo: required
 
-dist: trusty
+dist: bionic
 
 matrix:
   include:
@@ -43,6 +43,19 @@ matrix:
         - BUILD_NAME=UBUNTU_BIONIC_3_6
         - BOOST_PYTHON_NUMPY_EIGEN_PYTHON_VERSION="3.6"
         - DOCKER_FILE="ubuntu-bionic"
+      services: docker
+    - os: linux
+      compiler: gcc
+      env:
+        - BUILD_NAME=UBUNTU_EOAN_3_7
+        - BOOST_PYTHON_NUMPY_EIGEN_PYTHON_VERSION="3.7"
+        - DOCKER_FILE="ubuntu-eoan"
+    - os: linux
+      compiler: gcc
+      env:
+        - BUILD_NAME=UBUNTU_FOCAL_3_8
+        - BOOST_PYTHON_NUMPY_EIGEN_PYTHON_VERSION="3.8"
+        - DOCKER_FILE="ubuntu-focal"
       services: docker
     - os: osx
       osx_image: xcode9.3
